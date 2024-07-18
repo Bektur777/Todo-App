@@ -6,7 +6,7 @@ This is a simple ToDo application that allows users to manage their tasks. The a
 
 Before you begin, ensure you have met the following requirements:
 
-- **Java Development Kit (JDK)**: Make sure you have JDK 17 or higher installed. You can download it from [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
+- **Java Development Kit (JDK)**: Make sure you have JDK 17 or higher installed. You can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17).
 - **Docker**: Docker is required to run the PostgreSQL database in a container. Follow the instructions in the official Docker documentation to install Docker on your machine:
     - [Docker Desktop for Windows](https://docs.docker.com/desktop/windows/install/)
     - [Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
