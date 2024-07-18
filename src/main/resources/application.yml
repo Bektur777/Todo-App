@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: todo-app
+  sql:
+    init:
+      mode: always
+  docker:
+    compose:
+      enabled: true
+      lifecycle-management: start_and_stop
+      start:
+        log-level: info
+        command: up
+      stop:
+        command: stop
+
+  profiles:
+    active: prod
+
+
+server:
+  port: 8081
+
