@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user
+      author: Bektur
+      changes:
+        - createTable:
+            tableName: todo_user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: username
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+                    unique: true
+              - column:
+                  name: role
+                  type: varchar(20)
+                  constraints:
+                    checkConstraint: "status IN ('USER', 'ADMIN')"
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    checkConstraint: "status IN ('ACTIVE', 'DELETED')"
+              - column:
+                  name: created
+                  type: timestamp
+              - column:
+                  name: updated
+                  type: timestamp
+
+        - addForeignKeyConstraint:
+            baseTableName: task
+            baseColumnNames: user_id
+            constraintName: fk_task_user
+            referencedTableName: todo_user
+            referencedColumnNames: id
