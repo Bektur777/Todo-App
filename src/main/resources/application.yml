@@ -9,6 +9,15 @@ spring:
       name: username
       password: password
       roles: SERVICE
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    username: myuser
+    password: secret
+    url: jdbc:postgresql://localhost:32770/mydatabase
+  liquibase:
+    enabled: true
   docker:
     compose:
       enabled: true
