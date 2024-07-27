@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-user-id-to-task
+      author: Bektur
+      changes:
+        - addColumn:
+            tableName: task
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
