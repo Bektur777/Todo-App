@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: update-task-timestamp
+      author: Bektur
+      changes:
+        - modifyDataType:
+            tableName: task
+            columnName: created
+            newDataType: timestamp
+        - modifyDataType:
+            tableName: task
+            columnName: updated
+            newDataType: timestamp
