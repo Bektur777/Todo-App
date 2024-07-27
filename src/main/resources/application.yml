@@ -4,6 +4,11 @@ spring:
   sql:
     init:
       mode: always
+  security:
+    user:
+      name: username
+      password: password
+      roles: SERVICE
   docker:
     compose:
       enabled: true
@@ -16,7 +21,6 @@ spring:
 
   profiles:
     active: prod
-
 
 server:
   port: 8081
