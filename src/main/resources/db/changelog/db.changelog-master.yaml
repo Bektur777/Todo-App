@@ -3,3 +3,7 @@ databaseChangeLog:
       file: db/changelog/changeset/create-task-table.yaml
   - include:
       file: db/changelog/changeset/update-task-table.yaml
+  - include:
+      file: db/changelog/changeset/add-user_id-to-task.yaml
+  - include:
+      file: db/changelog/changeset/create-user-table.yaml
