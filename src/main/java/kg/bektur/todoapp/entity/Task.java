@@ -24,5 +24,9 @@ public class Task extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "task_status")
     private TaskStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
 
