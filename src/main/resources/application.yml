@@ -9,6 +9,22 @@ spring:
       ddl-auto: none
   liquibase:
     enabled: true
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/todo
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: todo-app
+            client-secret: wF9HVUD7HjmYBb5HW9jURPjQsy1s2faN
+            scope:
+              - openid
+              - task_view
+              - microprofile-jwt
+
   docker:
     compose:
       enabled: true
