@@ -11,6 +11,9 @@ spring:
     enabled: true
   security:
     oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/todo
       client:
         provider:
           keycloak:
@@ -23,8 +26,8 @@ spring:
             scope:
               - openid
               - task_view
+              - task_edit
               - microprofile-jwt
-
   docker:
     compose:
       enabled: true
