@@ -14,20 +14,20 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8082/realms/todo
-      client:
-        provider:
-          keycloak:
-            issuer-uri: http://localhost:8082/realms/todo
-            user-name-attribute: preferred_username
-        registration:
-          keycloak:
-            client-id: todo-app
-            client-secret: wF9HVUD7HjmYBb5HW9jURPjQsy1s2faN
-            scope:
-              - openid
-              - task_view
-              - task_edit
-              - microprofile-jwt
+#      client:
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8082/realms/todo
+#            user-name-attribute: preferred_username
+#        registration:
+#          keycloak:
+#            client-id: todo-app
+#            client-secret: wF9HVUD7HjmYBb5HW9jURPjQsy1s2faN
+#            scope:
+#              - openid
+#              - task_view
+#              - task_edit
+#              - microprofile-jwt
   docker:
     compose:
       enabled: true
@@ -37,9 +37,12 @@ spring:
         command: up
       stop:
         command: stop
-
+logging:
   profiles:
     active: prod
+  level:
+    org.springframework.security: DEBUG
+    org.keycloak: DEBUG
 
 server:
   port: 8081
