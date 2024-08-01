@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import kg.bektur.todoapp.entity.Task;
 import kg.bektur.todoapp.enumuration.EntityStatus;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -38,7 +39,7 @@ public class TaskRepositoryTest {
         assertThat(task.getEntityStatus()).isEqualTo(EntityStatus.ACTIVE);
 
         // when
-        taskRepository.softDelete(task.getId());
+        taskRepository.softDelete(task.getId(), Mockito.any());
         entityManager.clear();
 
         Optional<Task> byId = taskRepository.findById(task.getId());

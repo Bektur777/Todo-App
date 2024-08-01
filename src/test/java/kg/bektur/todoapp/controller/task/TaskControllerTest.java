@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -59,7 +60,7 @@ public class TaskControllerTest {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/tasks/{taskId}", taskId);
 
         // when
-        when(taskService.find(taskId)).thenReturn(taskDto);
+        when(taskService.find(taskId, Mockito.any())).thenReturn(taskDto);
         mockMvc.perform(requestBuilder)
                 // then
                 .andDo(print())
@@ -78,7 +79,7 @@ public class TaskControllerTest {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.patch("/api/tasks/{taskId}/done", taskId);
 
         // when
-        when(taskService.doneTask(taskId)).thenReturn(taskDto);
+        when(taskService.doneTask(taskId, Mockito.any())).thenReturn(taskDto);
         taskDto.setStatus(TaskStatus.DONE);
         mockMvc.perform(requestBuilder)
                 // then

@@ -65,7 +65,7 @@ public class TaskServiceTest {
         when(taskRepository.findAll()).thenReturn(tasks);
         when(taskMapper.taskToTaskDto(task)).thenReturn(taskDto);
 
-        List<TaskDto> result = taskService.findAll();
+        List<TaskDto> result = taskService.findAll(Mockito.any());
 
         // then
         assertThat(result).isEqualTo(taskDtos);
@@ -77,7 +77,7 @@ public class TaskServiceTest {
         when(taskRepository.findById(1L)).thenReturn(Optional.ofNullable(task));
         when(taskMapper.taskToTaskDto(task)).thenReturn(taskDto);
 
-        TaskDto result = taskService.find(1L);
+        TaskDto result = taskService.find(1L, Mockito.any());
 
         // then
         assertThat(taskDto).isEqualTo(result);
@@ -92,7 +92,7 @@ public class TaskServiceTest {
         when(taskRepository.findById(id)).thenReturn(Optional.empty());
 
         // then
-        assertThrows(TaskNotFoundException.class, () -> taskService.find(id));
+        assertThrows(TaskNotFoundException.class, () -> taskService.find(id, Mockito.any()));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class TaskServiceTest {
         task.setStatus(TaskStatus.DONE);
         when(taskMapper.taskToTaskDto(task)).thenReturn(taskDto);
 
-        TaskDto result = taskService.doneTask(id);
+        TaskDto result = taskService.doneTask(id, Mockito.any());
 
         // then
         assertThat(result).isEqualTo(taskDto);
@@ -128,7 +128,7 @@ public class TaskServiceTest {
         when(taskRepository.save(task)).thenReturn(task);
         when(taskMapper.taskToTaskDto(task)).thenReturn(taskDto);
 
-        TaskDto result = taskService.create(taskCreateDto);
+        TaskDto result = taskService.create(taskCreateDto, Mockito.any());
 
         // then
         assertThat(result).isEqualTo(taskDto);
@@ -140,10 +140,10 @@ public class TaskServiceTest {
         Long taskId = 1L;
 
         // when
-        taskService.deleteById(taskId);
+        taskService.deleteById(taskId, Mockito.any());
 
         // then
-        verify(taskRepository).softDelete(taskId);
+        verify(taskRepository).softDelete(taskId, Mockito.any());
     }
 
     @Test
@@ -162,7 +162,7 @@ public class TaskServiceTest {
         task.setDescription(taskDto.getDescription());
         when(taskMapper.taskToTaskDto(Mockito.any())).thenReturn(this.taskDto);
 
-        TaskDto result = taskService.update(taskDto, taskId);
+        TaskDto result = taskService.update(taskDto, taskId, Mockito.any());
 
         // then
         verify(taskRepository).findById(taskId);

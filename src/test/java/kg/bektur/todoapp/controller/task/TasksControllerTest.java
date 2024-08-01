@@ -8,6 +8,7 @@ import kg.bektur.todoapp.service.TaskService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -85,7 +86,7 @@ public class TasksControllerTest {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/tasks");
 
         // when
-        when(taskService.findAll()).thenReturn(tasks);
+        when(taskService.findAll(Mockito.any())).thenReturn(tasks);
         mockMvc.perform(requestBuilder)
                 // then
                 .andDo(print())
