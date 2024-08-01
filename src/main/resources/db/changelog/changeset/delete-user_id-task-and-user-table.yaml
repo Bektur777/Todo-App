@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: delete-user_id-and-user-table
+      author: Bektur
+      changes:
+        - dropAllForeignKeyConstraints:
+            baseTableName: task
+        - dropColumn:
+            tableName: task
+            columnName: user_id
+        - dropTable:
+            tableName: todo_user
