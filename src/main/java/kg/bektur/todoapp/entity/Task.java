@@ -5,6 +5,8 @@ import kg.bektur.todoapp.enumuration.TaskStatus;
 import lombok.*;
 import org.hibernate.annotations.SQLRestriction;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Builder
@@ -24,5 +26,8 @@ public class Task extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "task_status")
     private TaskStatus status;
+
+    @Column(name = "user_id")
+    private UUID userId;
 }
 
