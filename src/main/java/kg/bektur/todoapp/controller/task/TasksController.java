@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -39,8 +40,8 @@ public class TasksController {
                     schema = @Schema(implementation = TaskDto.class))
             )
     })
-    public List<TaskDto> findTasks() {
-        return taskService.findAll();
+    public List<TaskDto> findTasks(Authentication currentUser) {
+        return taskService.findAll(currentUser);
     }
 
     @SneakyThrows
@@ -53,7 +54,7 @@ public class TasksController {
                     content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = ProblemDetail.class)))
     })
-    public ResponseEntity<?> createTask(@Valid @RequestBody TaskCreateDto taskCreateDto, BindingResult bindingResult) {
+    public ResponseEntity<?> createTask(@Valid @RequestBody TaskCreateDto taskCreateDto, Authentication currentUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             if (bindingResult instanceof BindException exception) {
                 throw exception;
@@ -62,7 +63,7 @@ public class TasksController {
             }
         }
 
-        taskService.create(taskCreateDto);
+        taskService.create(taskCreateDto, currentUser);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

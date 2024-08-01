@@ -16,6 +16,7 @@ import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,8 @@ public class TaskController {
     private final TaskService taskService;
 
     @ModelAttribute("task")
-    public TaskDto getTask(@PathVariable("taskId") Long taskId) {
-        return taskService.find(taskId);
+    public TaskDto getTask(@PathVariable("taskId") Long taskId, Authentication authentication) {
+        return taskService.find(taskId, authentication);
     }
 
     @GetMapping
@@ -43,8 +44,8 @@ public class TaskController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProblemDetail.class)))
     })
-    public TaskDto findTask(@PathVariable("taskId") Long taskId) {
-        return taskService.find(taskId);
+    public TaskDto findTask(@PathVariable("taskId") Long taskId, Authentication authentication) {
+        return taskService.find(taskId, authentication);
     }
 
     @SneakyThrows
@@ -61,8 +62,9 @@ public class TaskController {
                     schema = @Schema(implementation = ProblemDetail.class)))
     })
     public ResponseEntity<?> updateTask(@Valid @RequestBody TaskCreateDto taskDto,
-                                           @PathVariable("taskId") Long taskId,
-                                           BindingResult bindingResult) {
+                                        @PathVariable("taskId") Long taskId,
+                                        BindingResult bindingResult,
+                                        Authentication authentication) {
         if (bindingResult.hasErrors()) {
             if (bindingResult instanceof BindException exception)
                 throw exception;
@@ -70,7 +72,7 @@ public class TaskController {
                 throw new BindException(bindingResult);
         }
 
-        taskService.update(taskDto, taskId);
+        taskService.update(taskDto, taskId, authentication);
 
         return ResponseEntity.ok("Task updated successfully");
     }
@@ -85,8 +87,8 @@ public class TaskController {
                     content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = ProblemDetail.class)))
     })
-    public ResponseEntity<TaskDto> doneTask(@PathVariable("taskId") Long taskId ) {
-        TaskDto taskDto = taskService.doneTask(taskId);
+    public ResponseEntity<TaskDto> doneTask(@PathVariable("taskId") Long taskId, Authentication authentication) {
+        TaskDto taskDto = taskService.doneTask(taskId, authentication);
 
         return ResponseEntity
                 .ok()
@@ -102,8 +104,8 @@ public class TaskController {
                     content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = ProblemDetail.class)))
     })
-    public ResponseEntity<?> deleteTask(@PathVariable("taskId") Long taskId) {
-        taskService.deleteById(taskId);
+    public ResponseEntity<?> deleteTask(@PathVariable("taskId") Long taskId, Authentication authentication) {
+        taskService.deleteById(taskId, authentication);
 
         return ResponseEntity.ok("Task deleted successfully");
     }
