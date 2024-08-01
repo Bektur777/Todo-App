@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-new-column-user_id
+      author: Bektur
+      changes:
+        - addColumn:
+            tableName: task
+            columns:
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false

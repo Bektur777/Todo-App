@@ -9,3 +9,5 @@ databaseChangeLog:
       file: db/changelog/changeset/create-user-table.yaml
   - include:
       file: db/changelog/changeset/drop-column-user_id-and-user-table.yaml
+  - include:
+      file: db/changelog/changeset/add-column-user_id-to-task.yaml
