@@ -15,11 +15,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -29,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 @ActiveProfiles("test")
+@WithMockUser(username = "username", authorities = {"SCOPE_task_edit"})
 public class TaskControllerTest {
 
     @Autowired
@@ -54,13 +57,14 @@ public class TaskControllerTest {
 
     @SneakyThrows
     @Test
+    @WithMockUser(username = "username", authorities = {"SCOPE_task_view"})
     void findTaskById_IfTaskExist_ReturnTaskDto() {
         // given
         long taskId = 1L;
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/tasks/{taskId}", taskId);
 
         // when
-        when(taskService.find(taskId, Mockito.any())).thenReturn(taskDto);
+        when(taskService.find(eq(taskId), Mockito.any())).thenReturn(taskDto);
         mockMvc.perform(requestBuilder)
                 // then
                 .andDo(print())
@@ -79,7 +83,7 @@ public class TaskControllerTest {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.patch("/api/tasks/{taskId}/done", taskId);
 
         // when
-        when(taskService.doneTask(taskId, Mockito.any())).thenReturn(taskDto);
+        when(taskService.doneTask(eq(taskId), Mockito.any())).thenReturn(taskDto);
         taskDto.setStatus(TaskStatus.DONE);
         mockMvc.perform(requestBuilder)
                 // then
