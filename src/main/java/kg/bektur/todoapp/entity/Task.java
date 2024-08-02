@@ -27,7 +27,7 @@ public class Task extends AbstractEntity {
     @Column(name = "task_status")
     private TaskStatus status;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private UUID userId;
 }
 
