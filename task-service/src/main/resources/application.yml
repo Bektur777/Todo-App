@@ -1,4 +1,12 @@
 spring:
+  boot:
+    admin:
+      client:
+        enabled: true
+        instance:
+          name: task-service
+          service-host-type: ip
+        url: http://localhost:8083
   application:
     name: todo-app
   sql:
@@ -38,6 +46,7 @@ spring:
         command: up
       stop:
         command: stop
+
 logging:
   profiles:
     active: prod
