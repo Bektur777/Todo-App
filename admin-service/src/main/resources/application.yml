@@ -1,2 +1,17 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/todo
+        registration:
+          keycloak:
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics
+            client-id: admin-service
+            client-secret: vIzwmkPORjNp37sRYkGFDNWyTJGWtRZf
+
 server:
   port: 8083
