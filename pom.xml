@@ -11,6 +11,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>task-service</module>
+    <module>admin-service</module>
   </modules>
 
   <properties>
