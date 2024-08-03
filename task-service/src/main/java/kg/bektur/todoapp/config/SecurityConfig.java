@@ -19,6 +19,7 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(httpRequest -> httpRequest
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/actuator/**").hasAuthority("SCOPE_metrics")
                         .requestMatchers(HttpMethod.POST).hasAuthority("SCOPE_task_edit")
                         .requestMatchers(HttpMethod.PATCH, "/api/tasks/**").hasAuthority("SCOPE_task_edit")
                         .requestMatchers(HttpMethod.DELETE, "/api/tasks/**").hasAuthority("SCOPE_task_edit")
