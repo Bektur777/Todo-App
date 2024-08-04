@@ -16,3 +16,12 @@ services:
 #    ports:
 #      - '8082:8080'
 #    command: ["start-dev"]
+
+  victoria-metrics:
+    image: 'victoriametrics/victoria-metrics:v1.93.12'
+    ports:
+      - '8428:8428'
+    volumes:
+      - './configs/victoria-metrics/promscrape.yaml:/promscrape.yaml'
+    command:
+      - '-promscrape.config=promscrape.yaml'
