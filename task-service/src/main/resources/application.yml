@@ -5,7 +5,6 @@ spring:
         enabled: true
         instance:
           name: task-service
-          service-host-type: ip
         url: http://localhost:8083
   application:
     name: todo-app
@@ -70,9 +69,12 @@ management:
     readinessstate:
       enabled: true
   endpoints:
-    jmx:
+    web:
       exposure:
         include: '*'
+  info:
+    env:
+      enabled: true
 
 server:
   port: 8081
