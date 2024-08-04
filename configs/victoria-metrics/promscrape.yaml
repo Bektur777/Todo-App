@@ -1,12 +1,12 @@
 scrape_configs:
   - job_name: todo-task-service
     static_configs:
-      - targets: ["http://127.17.0.1:8081"]
-    metrics_path: /actuator/health
+      - targets:
+          - http://192.168.0.105:8081/actuator/prometheus
     oauth2:
-      client_id: victoria-metrics
+      client_id: victoria-metrics-keycloak
       client_secret: SiMxtWmgXDwktFG1BXALEQIOZvRU0n6v
-      token_url: http://127.17.0.1:8082/realms/todo/protocol/openid-connect/token
+      token_url: http://192.168.0.105:8082/realms/todo/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
