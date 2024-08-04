@@ -1,0 +1,13 @@
+scrape_configs:
+  - job_name: todo-task-service
+    static_configs:
+      - targets: ["http://127.17.0.1:8081"]
+    metrics_path: /actuator/health
+    oauth2:
+      client_id: victoria-metrics
+      client_secret: SiMxtWmgXDwktFG1BXALEQIOZvRU0n6v
+      token_url: http://127.17.0.1:8082/realms/todo/protocol/openid-connect/token
+      scopes:
+        - metrics
+      endpoint_params:
+        grant_type: client_credentials
