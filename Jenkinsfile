@@ -16,6 +16,7 @@ pipeline {
                     for (module in modules) {
                         dir(module) {
                             echo "Building ${module}"
+                            pwd
                             sh 'mvn clean install'
                         }
                     }
