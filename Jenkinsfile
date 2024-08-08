@@ -7,14 +7,20 @@ pipeline {
         stage('build') {
 
             steps {
-                echo 'build...'
+                def modules = ['task-service', 'admin-service']
+                for (module in modules) {
+                    sh "mvn -pl ${module} clean install"
+                }
             }
         }
 
         stage('test') {
 
             steps {
-                echo 'test...'
+                def modules = ['task-service', 'admin-service']
+                for (module in modules) {
+                    sh "mvn -pl ${module} test"
+                }
             }
         }
 
