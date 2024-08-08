@@ -11,9 +11,14 @@ pipeline {
         stage('build') {
 
             steps {
-                def modules = ['task-service', 'admin-service']
-                for (module in modules) {
-                    sh "mvn -pl ${module} clean install"
+                script {
+                    def modules = ['task-service', 'admin-service']
+                    for (module in modules) {
+                        dir(module) {
+                            echo "Building ${module}"
+                            sh 'mvn clean install'
+                        }
+                    }
                 }
             }
         }
@@ -21,9 +26,14 @@ pipeline {
         stage('test') {
 
             steps {
-                def modules = ['task-service', 'admin-service']
-                for (module in modules) {
-                    sh "mvn -pl ${module} test"
+                script {
+                    def modules = ['task-service', 'admin-service']
+                    for (module in modules) {
+                        dir(module) {
+                            echo "Testing ${module}"
+                            sh 'mvn test'
+                        }
+                    }
                 }
             }
         }
