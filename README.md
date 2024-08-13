@@ -39,3 +39,10 @@ The application uses an in-memory H2 database for testing. You can run the tests
 
 ```sh
 ./mvnw test
+```
+
+## Advisory
+
+Consider using NGINX instead of Spring Cloud for routing and load balancing. NGINX offers high performance and simplicity for managing traffic, SSL termination, and caching. Since this project needs a simple reverse proxy and load balancer, and the service management requirements are not complicated, Nginx may be an excellent choice.
+
+If you want to get a complete set of microservices tools and deeper integration with Spring Boot, then Spring Cloud may be better.
