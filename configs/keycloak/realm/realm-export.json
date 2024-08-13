@@ -331,6 +331,7 @@
           "attributes": {}
         }
       ],
+      "victoria-metrics-keycloak": [],
       "admin-cli": [],
       "account-console": [],
       "todo-app-swagger-ui": [],
@@ -432,7 +433,8 @@
           "containerId": "e4367877-3e34-41e8-8255-bf27fe10866d",
           "attributes": {}
         }
-      ]
+      ],
+      "admin-service": []
     }
   },
   "groups": [
@@ -511,6 +513,22 @@
   "webAuthnPolicyPasswordlessExtraOrigins": [],
   "users": [
     {
+      "id": "dd61a532-d90e-4d29-a713-ffdec1b22c93",
+      "username": "service-account-admin-service",
+      "emailVerified": false,
+      "createdTimestamp": 1722698448840,
+      "enabled": true,
+      "totp": false,
+      "serviceAccountClientId": "admin-service",
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-todo"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
       "id": "d7d294db-0bf4-4fb8-80f3-95775f521284",
       "username": "service-account-todo-app",
       "emailVerified": false,
@@ -528,6 +546,22 @@
           "uma_protection"
         ]
       },
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "bad9e163-09b9-4b48-a72b-b1d928cee79b",
+      "username": "service-account-victoria-metrics-keycloak",
+      "emailVerified": false,
+      "createdTimestamp": 1722762676469,
+      "enabled": true,
+      "totp": false,
+      "serviceAccountClientId": "victoria-metrics-keycloak",
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-todo"
+      ],
       "notBefore": 0,
       "groups": []
     }
@@ -689,6 +723,110 @@
         "address",
         "phone",
         "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
+      "id": "85c1aacd-0e7e-46d1-bd1d-3818c83e97dc",
+      "clientId": "admin-service",
+      "name": "",
+      "description": "",
+      "rootUrl": "",
+      "adminUrl": "",
+      "baseUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
+      "redirectUris": [
+        "/*"
+      ],
+      "webOrigins": [
+        "/*"
+      ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "publicClient": false,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "oidc.ciba.grant.enabled": "false",
+        "client.secret.creation.time": "1722698448",
+        "backchannel.logout.session.required": "true",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "protocolMappers": [
+        {
+          "id": "265162e0-d8ae-407c-b2c3-7b2d4114ee8d",
+          "name": "Client Host",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientHost",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientHost",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "1c75e9ea-c7d5-4067-838c-1109cca4c9a4",
+          "name": "Client IP Address",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientAddress",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientAddress",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "9d1d5269-8114-4c74-a504-8ecd79ed93ea",
+          "name": "Client ID",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "client_id",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "client_id",
+            "jsonType.label": "String"
+          }
+        }
+      ],
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "roles",
+        "profile",
+        "basic",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "task_edit",
+        "phone",
+        "task_view",
+        "offline_access",
+        "metrics",
         "microprofile-jwt"
       ]
     },
@@ -994,6 +1132,111 @@
         "phone",
         "task_view",
         "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
+      "id": "bd28fe77-e50f-4fc2-9d23-a44233973116",
+      "clientId": "victoria-metrics-keycloak",
+      "name": "",
+      "description": "",
+      "rootUrl": "",
+      "adminUrl": "",
+      "baseUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
+      "redirectUris": [
+        "/*"
+      ],
+      "webOrigins": [
+        "/*"
+      ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "publicClient": false,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "oidc.ciba.grant.enabled": "false",
+        "client.secret.creation.time": "1722762676",
+        "backchannel.logout.session.required": "true",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "display.on.consent.screen": "false",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "protocolMappers": [
+        {
+          "id": "54366f44-4f28-4ec4-88c9-efbca2d45a32",
+          "name": "Client Host",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientHost",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientHost",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "0fb0e773-f762-48b1-9bbd-2175e9f59352",
+          "name": "Client IP Address",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientAddress",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientAddress",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "5e8ed25c-48d1-44d1-9769-4e21565f7a6f",
+          "name": "Client ID",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "client_id",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "client_id",
+            "jsonType.label": "String"
+          }
+        }
+      ],
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "roles",
+        "profile",
+        "basic",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "task_edit",
+        "phone",
+        "task_view",
+        "offline_access",
+        "metrics",
         "microprofile-jwt"
       ]
     }
@@ -1334,6 +1577,18 @@
       }
     },
     {
+      "id": "b173fef2-6c0c-4433-97b2-436dbb4ef38c",
+      "name": "metrics",
+      "description": "",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "false",
+        "gui.order": "",
+        "consent.screen.text": ""
+      }
+    },
+    {
       "id": "43aef287-cf93-4827-bc14-0075bdae4a8b",
       "name": "task_edit",
       "description": "",
@@ -1613,7 +1868,8 @@
     "phone",
     "microprofile-jwt",
     "task_edit",
-    "task_view"
+    "task_view",
+    "metrics"
   ],
   "browserSecurityHeaders": {
     "contentSecurityPolicyReportOnly": "",

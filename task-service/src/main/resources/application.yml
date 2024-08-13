@@ -21,21 +21,6 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://192.168.0.105:8082/realms/todo
-#          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
-#      client:
-#        provider:
-#          keycloak:
-#            issuer-uri: http://localhost:8082/realms/todo
-#            user-name-attribute: preferred_username
-#        registration:
-#          keycloak:
-#            client-id: todo-app
-#            client-secret: wF9HVUD7HjmYBb5HW9jURPjQsy1s2faN
-#            scope:
-#              - openid
-#              - task_view
-#              - task_edit
-#              - microprofile-jwt
   docker:
     compose:
       enabled: true
@@ -60,7 +45,7 @@ springdoc:
       use-pkce-with-authorization-code-grant: true
 
 keycloak:
-  uri: http://localhost:8082
+  uri: http://192.168.0.105:8082
 
 management:
   health:
@@ -71,9 +56,7 @@ management:
   endpoints:
     web:
       exposure:
-        include:
-          - health
-          - prometheus
+        include: '*'
   info:
     env:
       enabled: true
